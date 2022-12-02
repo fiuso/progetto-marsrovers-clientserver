@@ -1,0 +1,43 @@
+ {
+    "command": "map",
+    "paramters": {
+
+    }
+ }
+
+ // comando di movimento da parte client
+ {
+    "command": "move",
+    "parameters": {
+        "direction": "LEFT"
+    }
+ }
+
+ {
+    "request": {
+        "command": "move",
+        "direction": "LEFT"
+    },
+
+    "status": {
+        "game-controller" : {
+            "robot-life": 3,
+            "collision": true,
+            "game-over": true,
+            "map": {
+                "robot-position": {
+                    "X": 3, "Y":3
+                },
+                "visibile-field" : [
+                [0,0,0,0,0,0,0,0]
+                [0,0,0,0,0,0,0]
+                [0,0,0,0,0,0,0]
+                [1,1,1, 0,0,10,]
+                [][][][]
+            ],
+                "map-size": { "X": 64, "Y": 64}
+            }
+        
+        }
+    }
+ }
