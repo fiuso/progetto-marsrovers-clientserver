@@ -57,18 +57,22 @@ namespace Client_MarsRover.SocketClient {
             if (!_pendingRequest) //controlla se c'è gia una richiesta e se c'è già la va a saltare
             {
                 // teoricamnete siamo fuori dal nostro standard interno
-                var request = _requests.Peek();
-
                 var socketRequest = new SocketRequest { Request = _requests.Peek() };
                 var sendString = JsonSerializer.Serialize(socketRequest) + "<|EOM|>"; //converte i dati in json + EOM
 
                 _ = await socket.SendAsync(Encoding.UTF8.GetBytes(sendString), SocketFlags.None); // mandata la stringa in byte 
                 Console.WriteLine($"Socket client sent message: \"{sendString}\"");
+
+                // Abbuamo mandato una richiesta al server e quindi fino a quando ci risponde non vogliamo mandarne altre
                 _pendingRequest = true;
             }
 
-            var received = await socket.ReceiveAsync(buffer, SocketFlags.None);
+
+
+            // Siamo in ricezione della mappa dal server
+            // var received = await socket.ReceiveAsync(buffer, SocketFlags.None);
             var response = Encoding.UTF8.GetString(buffer, 0, received);
+
 
             if (response.Contains("<|EOM|>")) //  controllare che c'è il terninatore 
             {

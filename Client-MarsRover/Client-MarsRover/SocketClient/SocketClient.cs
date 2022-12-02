@@ -29,7 +29,7 @@ namespace Client_MarsRover.SocketClient
 
                 var cts = new CancellationTokenSource();
                 cts.CancelAfter(2000);
-
+                // cancellazione della richiesta al socket server dopo 2 secondi se non riesce a connnetersi (tipo server non risponde)
                 await this.socket.ConnectAsync(this._endPoint, cts.Token);
 
                 this.requestManager.Connection = true;
@@ -42,7 +42,7 @@ namespace Client_MarsRover.SocketClient
                             var result = await this.requestManager.SendQueuedRequest(this.socket);
                             this.requestManager.Connection = result;
                         }
-                        Thread.Sleep(100);
+                        Thread.Sleep(100); // non posssiamo mandare richieste infinite, inultimente. Per non far pesare il client 
 
                     } catch (Exception exception) {
                         Console.WriteLine(exception.ToString());

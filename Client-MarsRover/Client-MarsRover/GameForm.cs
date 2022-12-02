@@ -78,10 +78,7 @@ namespace Client_MarsRover
             thread.Start();
 
             this.FormClosing += (obj, e) => {           //quando questo evento viene lanciato 
-                
-                thread.Join();
-                connnectionThread.Join();
-                Environment.Exit(1);
+                Environment.Exit(Environment.ExitCode);
             };
 
         }
